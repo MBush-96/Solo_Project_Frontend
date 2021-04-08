@@ -7,7 +7,7 @@ Users will login to the website and on authentication be shown their profile scr
 
 ### Wireframes
 
-User is not logged in
+User is not logged in<br />
 <img src="https://i.imgur.com/gLcf280.png" width="310" height="500" />
 
 User profile page
