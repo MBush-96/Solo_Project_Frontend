@@ -7,17 +7,18 @@ Users will login to the website and on authentication be shown their profile scr
 
 ### Wireframes
 
-<img src="https://i.imgur.com/gLcf280.png" width="310" height="500" />
 User is not logged in
+<img src="https://i.imgur.com/gLcf280.png" width="310" height="500" />
 
-<img src="https://i.imgur.com/nlagQ1U.png" width="310" height="500" />
 User profile page
+<img src="https://i.imgur.com/nlagQ1U.png" width="310" height="500" />
 
-<img src="https://i.imgur.com/lb6k8s7.png" width="310" height="500" />
 User attack screen
+<img src="https://i.imgur.com/lb6k8s7.png" width="310" height="500" />
 
-<img src="https://i.imgur.com/zbuO6KK.png" width="310" height="500" />
 User after report screen
+<img src="https://i.imgur.com/zbuO6KK.png" width="310" height="500" />
+
 
 ### User stories
 
