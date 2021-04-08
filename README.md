@@ -7,10 +7,10 @@ Users will login to the website and on authentication be shown their profile scr
 
 ### Wireframes
 
-<img src="https://i.imgur.com/gLcf280.png" width="100" height="200" />
+<img src="https://i.imgur.com/gLcf280.png" width="200" height="400" />
 User is not logged in
 
-<img src="https://i.imgur.com/nlagQ1U.png" width="100" height="200" />
+<img src="https://i.imgur.com/nlagQ1U.png" width="200" height="400" />
 User profile page
 
 ### User stories
