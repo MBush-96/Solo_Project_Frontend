@@ -3,18 +3,18 @@
 
 ### Overview
 
-Users will login to the website and on authentication be shown their profile screen. They will be able to create their city if they havent already done so aswell as train the troops that they want. The player can also decide to attack another user if they wish by clicking the attack button and choosing which user they would like to attack. If they commit to this attack user one's designated troops will attack user two's city. The game will calcualte the opposing armies forces against the defending armies forces and determine the winner. All caualties to the war will be removed from each users respective troop numbers. If the opposing force wins the war for the city they will conquer the city and claim it resulting in extra income, resources, etc.. and the defending force will lose all troops and the city that it was defending. If it is their only city the user will be reset and have to create a new city fomr the start.
+Users will login to the website and on authentication be shown their profile screen. They will be able to create their city if they havent already done so as well as train the troops that they want. The player can also decide to attack another user if they wish by clicking the attack button and choosing which user they would like to attack. If they commit to this attack, user one's designated troops will attack user two's city. The game will calcualte the opposing armies forces against the defending armies' forces and determine the winner. All caualties of the war will be removed from each users respective troop numbers. If the opposing force wins the war for the city they will conquer the city, and claim it. resulting in extra income, resources, etc.. and the defending force will lose all troops and the city that it was defending. If it is their only city, the user will be reset and have to create a new city from the start.
 
 ### Wireframes
 
 
 ### User stories
 
-- When im not logged in the only thing displayed is the login button (Or recent wars).
-- When I login I see my owned citys and the active troops in those citys. I also see a section below that to train my specific troop that I wish to train. I see an attack player button that when clicked displays all the citys I can currently attack.
-- When I train a set of troops those troops are added to my citys troop count when they are done training.
-- When I attack another city I am visually notified of the outcome of my attack, if I won or lost the fight and how many troops I lost. If I won the fight I see the new city added to the list of owned citys in my profile page.
-- If I lost the fight and I was defending. I am notified that I was attacked and visually notified with who attacked me, how many troops they attacked with, and my casualties. The city is not longer one of my owned citys in my profile page.
+- When I'm not logged, in the only thing displayed is the login button (Or recent wars).
+- When I login, I see my own cities and the active troops in those cities. I also see a section below that for training a specific troop that I wish to be train. I see an attack player button that when clicked displays all the cities I can currently attack.
+- When I train a set of troops, those troops are added to my cities troop count, when they are done training.
+- When I attack another city, I am visually notified of the outcome of my attack, if I won or lost the fight and how many troops I lost. If I won the fight, I see the new city added to the list of owned citys in my profile page.
+- If I lost the fight and I was defending, I am notified that I was attacked and visually notified with who attacked me, how many troops they attacked with, and my casualties. The city is no longer one of my owned cities in my profile page.
 
 ### Routes Inventory
 
@@ -29,10 +29,10 @@ Users will login to the website and on authentication be shown their profile scr
 ### MVP checklist
 
 - User can login
-- User can create and name their city and it is added to their owned citys
+- User can create and name their city and it is added to their owned cities
 - User can train troops.
-- User can attack other citys and take them.
-- User can lose citys and get reset to the start.
+- User can attack other cities and take them.
+- User can lose cities and get reset to the start.
 
 
 ### Stretch goals
