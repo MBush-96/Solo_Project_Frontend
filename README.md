@@ -7,7 +7,7 @@ Users will login to the website and on authentication be shown their profile scr
 
 ### Wireframes
 
-(https://i.imgur.com/gLcf280.png)
+![not logged in](https://i.imgur.com/gLcf280.png)
 
 ### User stories
 
