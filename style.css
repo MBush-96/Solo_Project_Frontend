@@ -1,0 +1,188 @@
+html {
+    height: 100%;
+}
+body {
+    background-image: url('https://i.imgur.com/6W12U8T.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    height: 100%;
+}
+
+.headOfPage {
+    width: 100%;
+    height: 20vh;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    flex: row;
+    color: white;
+    font-size: x-large;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.headOfPage p {
+    margin-right: 55px;
+}
+
+.headOfPage p:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.profileCreateCityPopup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    display: flex;
+    width: 60%;
+    height: 60%;
+    background-color: rgba(255, 255, 255, .5);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+}
+
+.popup form {
+    display: flex;
+    flex-direction: column;
+}
+
+.loggedOutHome {
+    display: flex;
+    justify-content: center;
+    /* background-color: red; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.createAccount {
+    display: flex;
+    width: 25%;
+    background-color: gray;
+    flex-direction: column;
+    border-radius: 7%;
+}
+
+.loginToAccount {
+    display: flex;
+    width: 25%;
+    background-color: gray;
+    flex-direction: column;
+    border-radius: 7%;
+}
+
+.homepageFieldSize {
+    width: 90%;
+    height: 5vh;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom-width: 3px;
+    background-color: transparent;
+    text-align: center;
+    font-size: xx-large;
+    color: whitesmoke;
+    border-bottom-color: black;
+}
+
+.homepageFieldSize:focus::placeholder {
+    color: transparent;
+}
+
+.homepageFieldSize::placeholder {
+    color: black;
+}
+
+.homepageFieldSize:focus {
+    outline: none;
+    border-bottom-color: white;
+}
+
+#loginFormBtn {
+    width: 40%;
+    height: 5vh;
+    margin: 10px auto;
+    background-color: red;
+    color: white;
+    font-size: large;
+    border-radius: 11%;
+}
+
+#loginBtn {
+    width: 20%;
+    height: 6vh;
+    margin-bottom: 40px;
+    border-radius: 10%;
+    background-color: red;
+    color: white;
+    font-size: x-large;
+    border: 2px;
+    margin-top: 30px;
+}
+
+#loginForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+
+#caFormBtn {
+    width: 40%;
+    height: 5vh;
+    margin: 10px auto;
+    background-color: red;
+    color: white;
+    font-size: large;
+    border-radius: 11%;
+}
+
+#caFormBtn {
+    cursor: pointer;
+}
+
+#usernameFieldCa {
+    margin-top: 15px;
+}
+
+#createAccountBtn {
+    width: 20%;
+    height: 6vh;
+    margin-bottom: 40px;
+    border-radius: 10%;
+    background-color: red;
+    color: white;
+    font-size: x-large;
+    border: 2px;
+    margin-top: 30px;
+}
+
+#createAccountBtn:hover {
+    cursor: pointer;
+}
+
+#createAccountBtn:focus {
+    outline: none;
+}
+
+#createAccountForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none;
+}

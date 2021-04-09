@@ -1,0 +1,25 @@
+{
+  "name": "solo_project_frontend",
+  "version": "1.0.0",
+  "description": "Users will login to the website and on authentication be shown their profile screen. They will be able to create their city if they havent already done so as well as train the troops that they want. The player can also decide to attack another user if they wish by clicking the attack button and choosing which user they would like to attack. If they commit to this attack, user one's designated troops will attack user two's city. The game will calcualte the opposing armies forces against the defending armies' forces and determine the winner. All caualties of the war will be removed from each users respective troop numbers. If the opposing force wins the war for the city they will conquer the city, and claim it. resulting in extra income, resources, etc.. and the defending force will lose all troops and the city that it was defending. If it is their only city, the user will be reset and have to create a new city from the start.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MBush-96/Solo_Project_Frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MBush-96/Solo_Project_Frontend/issues"
+  },
+  "homepage": "https://github.com/MBush-96/Solo_Project_Frontend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "rowdy-logger": "^1.0.2"
+  }
+}

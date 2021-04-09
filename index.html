@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='./style.css' rel='stylesheet'>
+    <script src='./main.js' defer></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js' defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class='headOfPage'>
+            <p class="profileLink hlink">Profile</p>
+            <p class="seeUsersLink hlink">See users</p>
+            <p class="attackLink hlink">Attack</p>
+            <p class="logoutLink hlink">Logout</p>
+    </div>
+    <!-- LOGGED OUT HOME PAGE-->
+    <div class="loggedOutHome">
+        <button id="createAccountBtn">Create Account</button>
+        <div class="createAccount hidden">
+            <form id="createAccountForm" autocomplete="off">
+                <input type='text' class='homepageFieldSize' id='usernameFieldCa' name="usernameFieldCa" placeholder="Username" spellcheck="false"><br>
+                <input type='password' class='homepageFieldSize' id='passwordFieldCa' name="passwordFieldCa" placeholder="Password" spellcheck="false"><br>
+                <input type='submit' id='caFormBtn' value='Sign Up!'>
+            </form>
+        </div>
+        <button id="loginBtn">Login</button>
+        <div class="loginToAccount hidden">
+            <form id='loginForm' autocomplete="off">
+                <input type='text' class='homepageFieldSize' id='usernameFieldLogin' name='usernameFieldlogin' placeholder='Username' spellcheck="false"><br>
+                <input type='password' class='homepageFieldSize' id='passwordFieldLogin' name='passwordFieldlogin' placeholder="Password" spellcheck="false"><br>
+                <input type='submit' id='loginFormBtn' value='Login'>
+            </form>
+        </div>
+    </div>
+    <!-- LOGGED OUT HOME END -->
+    <div class='profileCreateCityPopup hidden'>
+        <div class='popup'>
+            <h4 class='popupTitle'>Greetings User you do not have a city!</h4>
+            <h4 class='popupTitle'>Please create one</h4>
+            <form id='createCityForm' autocomplete="off">
+                <input type='text' class='createCityName' placeholder="City Name" spellcheck="false">
+                <input type='submit' id='createCityBtn' value='Create City'>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
