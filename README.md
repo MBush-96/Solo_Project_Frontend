@@ -35,12 +35,14 @@ MVP ERB<br />
 
 |Verb|Route|Description|
 |----|-----------|-----|
-|Post| app.post('/city', func) | Create city, Add city |
-|Post| app.post('/user', func) | Create user |
+|Post| app.post('/city', func) | Create city |
+|Post| app.post('/user', func) | Create user, Add city |
+|Post| app.post('/user/login', func) | User login |
 |Put | app.put('/city', func) | Update city owner, update city troops, update previous city owner ID |
 |Put | app.put('/user/troops', func) | Update troop count, delete any casualties from troops |
-|Get | app.get('/user', func) | Retrieve user info |
+|Get | app.get('/user/:id', func) | Retrieve user info |
 |Get | app.get('/city/:id', func) | Retrieve city info |
+|Get | app.get('/city/, func) | Retrieve all cities |
 
 
 ### MVP checklist
@@ -54,6 +56,7 @@ MVP ERB<br />
 
 ### Stretch goals
 
+- After Combat reports
 - Training troops takes time and resources.
 - Improving your city takes time and resources.
 - Recent wars section on site that lists all the recent wars and its participants.
