@@ -20,7 +20,7 @@ User after report screen<br />
 <img src="https://i.imgur.com/zbuO6KK.png" width="370" height="500" />
 
 MVP ERB<br />
-<img src="https://i.imgur.com/7AaQQQP.png" width="710" height="300" />
+<img src="https://i.imgur.com/eaXtQ2d.png" width="710" height="300" />
 
 
 ### User stories
