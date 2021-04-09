@@ -38,13 +38,17 @@
     <!-- LOGGED OUT HOME END -->
     <div class='profileCreateCityPopup hidden'>
         <div class='popup'>
-            <h4 class='popupTitle'>Greetings User you do not have a city!</h4>
-            <h4 class='popupTitle'>Please create one</h4>
+            <h1 class='popupTitle pTFirstLine'>Greetings ${PH_USER} you do not have a city!</h1>
+            <h1 class='popupTitle pTSecondLine'>Create one</h1>
             <form id='createCityForm' autocomplete="off">
                 <input type='text' class='createCityName' placeholder="City Name" spellcheck="false">
                 <input type='submit' id='createCityBtn' value='Create City'>
             </form>
         </div>
+    </div>
+    <div class='profilePage'>
+        <div class='spacer'></div>
+        <div class='citiesOwned'></div>
     </div>
 </body>
 </html>
