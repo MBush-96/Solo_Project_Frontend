@@ -19,6 +19,9 @@ User attack screen<br />
 User after report screen<br />
 <img src="https://i.imgur.com/zbuO6KK.png" width="310" height="500" />
 
+Infanty ERB<br />
+<img src="https://i.imgur.com/7AaQQQP.png" width="310" height="500" />
+
 
 ### User stories
 
