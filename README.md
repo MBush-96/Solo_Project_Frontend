@@ -16,7 +16,7 @@ User profile page<br />
 User attack screen<br />
 <img src="https://i.imgur.com/lb6k8s7.png" width="370" height="500" />
 
-User after report screen<br />
+User after combat report screen<br />
 <img src="https://i.imgur.com/zbuO6KK.png" width="370" height="500" />
 
 MVP ERB<br />
