@@ -8,18 +8,18 @@ Users will login to the website and on authentication be shown their profile scr
 ### Wireframes
 
 User is not logged in<br />
-<img src="https://i.imgur.com/gLcf280.png" width="310" height="500" />
+<img src="https://i.imgur.com/gLcf280.png" width="370" height="500" />
 
 User profile page<br />
-<img src="https://i.imgur.com/nlagQ1U.png" width="310" height="500" />
+<img src="https://i.imgur.com/nlagQ1U.png" width="370" height="500" />
 
 User attack screen<br />
-<img src="https://i.imgur.com/lb6k8s7.png" width="310" height="500" />
+<img src="https://i.imgur.com/lb6k8s7.png" width="370" height="500" />
 
 User after report screen<br />
-<img src="https://i.imgur.com/zbuO6KK.png" width="310" height="500" />
+<img src="https://i.imgur.com/zbuO6KK.png" width="370" height="500" />
 
-Infanty ERB<br />
+MVP ERB<br />
 <img src="https://i.imgur.com/7AaQQQP.png" width="710" height="300" />
 
 
