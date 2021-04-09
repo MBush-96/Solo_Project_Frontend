@@ -33,9 +33,9 @@ User after report screen<br />
 |Verb|Route|Description|
 |----|-----------|-----|
 |Post| app.post('/city', func) | Create city, Add city|
-|Put | app.put('/user/city', func) | update city owner, 
-|Put | app.put('/user/troops', func) | update troop count, delete casualties|
-|Get | app.get('/user', func) | retrieve city owner, retrieve troop count|
+|Put | app.put('/user/city', func) | Update city owner, update city troops
+|Put | app.put('/user/troops', func) | Update troop count, delete casualties|
+|Get | app.get('/user', func) | Retrieve city owner, retrieve troop count|
 
 
 ### MVP checklist
