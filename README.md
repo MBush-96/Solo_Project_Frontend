@@ -39,7 +39,7 @@ MVP ERB<br />
 |Post| app.post('/user', func) | Create user, Add city |
 |Post| app.post('/user/login', func) | User login |
 |Put | app.put('/city', func) | Update city owner, update city troops, update previous city owner ID |
-|Put | app.put('/user/troops', func) | Update troop count, delete any casualties from troops |
+|Put | app.put('/user/:id/troops', func) | Update troop count, delete any casualties from troops |
 |Get | app.get('/user/:id', func) | Retrieve user info |
 |Get | app.get('/city/:id', func) | Retrieve city info |
 |Get | app.get('/city/, func) | Retrieve all cities |
