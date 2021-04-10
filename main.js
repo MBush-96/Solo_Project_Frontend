@@ -82,20 +82,22 @@ const displayAllUserCities = async () => {
     const cities = await axios.get(`${URL}city/${localStorage.getItem('userIn')}`)
     const cityPath = cities.data.city
     for(let i in cityPath) {
-        const newDiv = document.createElement('div')
-        const cityTitle = document.createElement('h2')
-        const cityTroops = document.createElement('p')
-        
-        newDiv.classList.add('city')
-        cityTitle.classList.add('cityTitle')
-        cityTroops.classList.add('cityTroops')
-        
-        cityTitle.innerText = cityPath[i].name
-        cityTroops.innerText = `Stationed Troops: ${cityPath[i].infantryInCity}`
-        
-        newDiv.appendChild(cityTitle)
-        newDiv.appendChild(cityTroops)
-        document.querySelector('.citiesOwned').appendChild(newDiv)
+        if(document.querySelector('.citiesOwned').children.length === 0) {
+            const newDiv = document.createElement('div')
+            const cityTitle = document.createElement('h2')
+            const cityTroops = document.createElement('p')
+            
+            newDiv.classList.add('city')
+            cityTitle.classList.add('cityTitle')
+            cityTroops.classList.add('cityTroops')
+            
+            cityTitle.innerText = cityPath[i].name
+            cityTroops.innerText = `Stationed Troops: ${cityPath[i].infantryInCity}`
+            
+            newDiv.appendChild(cityTitle)
+            newDiv.appendChild(cityTroops)
+            document.querySelector('.citiesOwned').appendChild(newDiv)
+        }
     }
 }
 
@@ -114,26 +116,22 @@ const getAllUserCities = async () => {
     }
 }
 
-document.querySelector('#trainInfantryFieldBtn').addEventListener('submit', e => {
+const deleteTroops = async casualties => {
+    const response = await axios.put(`${URL}user/${localStorage.getItem('userIn')}/troops`, {
+        removeTroops: casualties
+    })
+    console.log(response);
+}
+
+document.querySelector('.trainInfantryForm').addEventListener('submit', e => {
     e.preventDefault()
     const troops = document.querySelector('.trainInfantryField')
-    if (troops.value > 0) {
-        axios.put(`${URL}user/troops`, {
-            id: localStorage.getItem('userIn'),
-            infatryInReserve: troops.value
-        }).then(res => {
-            console.log(res);
-            document.querySelector('.troopsInReserves').innerText =  res.data.user.infantryInReserve
-        })
-    }
+    axios.put(`${URL}user/troops`, {
+        id: localStorage.getItem('userIn'),
+        infantryInReserve: troops.value
+    })
+    troops.value = null
 })
-
-// setInterval(() => {
-//     axios.get(`${URL}user/${localStorage.getItem('userIn')}`).then(res => {
-//         console.log(res);
-//         document.querySelector('.troopsInReserves').innerText =  res.data.user.infantryInReserve
-//     })
-// }, 1000);
 
 if(localStorage.getItem('userIn')) {
     hideIfLoggedIn.forEach(item => {
@@ -149,3 +147,9 @@ if(localStorage.getItem('userIn')) {
     })
 
 }
+
+setInterval(() => {
+    axios.get(`${URL}user/${localStorage.getItem('userIn')}`).then(res => {
+        document.querySelector('.troopReserves').innerText = `Troops in reserves: ${res.data.user.infantryInReserve}`
+    })
+}, 1000);
