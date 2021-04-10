@@ -3,6 +3,7 @@ const createAccount = document.querySelector('.createAccount')
 const loginAccount = document.querySelector('.loginToAccount')
 const createAccountBtn = document.querySelector('#createAccountBtn')
 const loginBtn = document.querySelector('#loginBtn')
+const helpPage = document.querySelector('.helpPage')
 
 const showIfLoggedIn = []
 const hideIfLoggedOut = []
@@ -13,21 +14,6 @@ headerLinks.forEach(item => {
     hideIfLoggedOut.push(item)
     showIfLoggedIn.push(item)
 })
-
-if(localStorage.getItem('userIn')) {
-    hideIfLoggedIn.forEach(item => {
-        item.classList.add('hidden')
-    })
-    document.querySelector('.profileCreateCityPopup').classList.remove('hidden')
-} else {
-    hideIfLoggedOut.forEach(item => {
-        item.classList.add('hidden')
-    })
-    showIfLoggedOut.forEach(item => {
-        item.classList.remove('hidden')
-    })
-
-}
 
 document.querySelector('.logoutLink').addEventListener('click', () => {
     localStorage.removeItem('userIn')
@@ -99,16 +85,67 @@ const displayAllUserCities = async () => {
         const newDiv = document.createElement('div')
         const cityTitle = document.createElement('h2')
         const cityTroops = document.createElement('p')
-
+        
         newDiv.classList.add('city')
         cityTitle.classList.add('cityTitle')
         cityTroops.classList.add('cityTroops')
-
+        
         cityTitle.innerText = cityPath[i].name
         cityTroops.innerText = `Stationed Troops: ${cityPath[i].infantryInCity}`
-
+        
         newDiv.appendChild(cityTitle)
         newDiv.appendChild(cityTroops)
         document.querySelector('.citiesOwned').appendChild(newDiv)
     }
+}
+
+document.querySelector('.profileLink').addEventListener('click', () => {
+    getAllUserCities()
+    document.querySelector('.profilePage').classList.remove('hidden')
+    helpPage.classList.add('hidden')
+})
+
+const getAllUserCities = async () => {
+    const response = await axios.get(`${URL}city/${localStorage.getItem('userIn')}`)
+    if (response.data.city.length === 0) {
+        document.querySelector('.profileCreateCityPopup').classList.remove('hidden')
+    } else {
+        displayAllUserCities()
+    }
+}
+
+document.querySelector('#trainInfantryFieldBtn').addEventListener('submit', e => {
+    e.preventDefault()
+    const troops = document.querySelector('.trainInfantryField')
+    if (troops.value > 0) {
+        axios.put(`${URL}user/troops`, {
+            id: localStorage.getItem('userIn'),
+            infatryInReserve: troops.value
+        }).then(res => {
+            console.log(res);
+            document.querySelector('.troopsInReserves').innerText =  res.data.user.infantryInReserve
+        })
+    }
+})
+
+// setInterval(() => {
+//     axios.get(`${URL}user/${localStorage.getItem('userIn')}`).then(res => {
+//         console.log(res);
+//         document.querySelector('.troopsInReserves').innerText =  res.data.user.infantryInReserve
+//     })
+// }, 1000);
+
+if(localStorage.getItem('userIn')) {
+    hideIfLoggedIn.forEach(item => {
+        item.classList.add('hidden')
+    })
+    document.querySelector('.helpPage').classList.remove('hidden')
+} else {
+    hideIfLoggedOut.forEach(item => {
+        item.classList.add('hidden')
+    })
+    showIfLoggedOut.forEach(item => {
+        item.classList.remove('hidden')
+    })
+
 }

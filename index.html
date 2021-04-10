@@ -14,7 +14,9 @@
             <p class="profileLink hlink">Profile</p>
             <p class="seeUsersLink hlink">See users</p>
             <p class="attackLink hlink">Attack</p>
+            <p class='Help hlink'>Help</p>
             <p class="logoutLink hlink">Logout</p>
+            <p class='troopReserves hlink'>Troops in reserves: <span class=troopsInReserves>0</span></p>
     </div>
     <!-- LOGGED OUT HOME PAGE-->
     <div class="loggedOutHome">
@@ -38,7 +40,7 @@
     <!-- LOGGED OUT HOME END -->
     <div class='profileCreateCityPopup hidden'>
         <div class='popup'>
-            <h1 class='popupTitle pTFirstLine'>Greetings ${PH_USER} you do not have a city!</h1>
+            <h1 class='popupTitle pTFirstLine'>Greetings <span class='popUpUserName'>${PH_USER}</span> you do not have a city!</h1>
             <h1 class='popupTitle pTSecondLine'>Create one</h1>
             <form id='createCityForm' autocomplete="off">
                 <input type='text' class='createCityName' placeholder="City Name" spellcheck="false">
@@ -46,9 +48,26 @@
             </form>
         </div>
     </div>
-    <div class='profilePage'>
-        <div class='spacer'></div>
+    <div class='profilePage hidden'>
+        <div class='trainTroops'>
+            <div class='infantry'>
+                <p>Infantry</p>
+                <form class='trainInfantryForm'>
+                    <input type='number' class='trainInfantryField' placeholder="Number of troops">
+                    <input type='submit' id='trainInfantryFieldBtn' value="Train">
+                </form>
+            </div>
+        </div>
         <div class='citiesOwned'></div>
+    </div>
+    <div class='helpPage hidden'>
+        <div class='infoSection'>
+            <h1 class=helpTitle>Information</h1>
+            <p>1) To begin click on your profile page and create a city, if you dont have one. If you ever lose all of your cities <br />this is how you will restart.</p>
+            <p>2) In your profile page you will see all of your cities, below them you will have the ability to send troops from your <br /> reserves to your cities to defend them.</p>
+            <p>3) If you are attacked or attack another player and you have more troops than they have defending, you will win a take their city.</p>
+            <p>4) To get more troops you will have to train them on the profile page.</p>
+        </div>
     </div>
 </body>
 </html>

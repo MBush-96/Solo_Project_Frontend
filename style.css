@@ -162,30 +162,79 @@ body {
 .profilePage {
     width: 100%;
     height: 100%;
-    border: 3px solid red;
     display: flex;
     align-items: flex-end;
     flex-direction: row;
+    margin-top: 25px;
 }
 
-.test {
+.trainTroops {
+    display: flex;
     width: 50%;
     height: 100%;
-    border: 3px solid white;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: center;
+    border-right: 10px solid white;
+}
+
+.infantry {
+    background-color: white;
+    width: 23%;
+    height: 20%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    background-image: url('https://wallpaperaccess.com/full/900297.jpg');
+    background-size: cover;
+    border: 2px solid white;
+}
+
+.infantry p {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-size: x-large;
+    color: whitesmoke;
+}
+
+.trainInfantryForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.trainInfantryField:focus {
+    outline: none;
+}
+
+#trainInfantryFieldBtn:hover {
+    cursor: pointer;
+}
+
+#trainInfantryFieldBtn {
+    margin-top: 10px;
+    background-color: red;
+    color: white;
+    width: 45%;
+    height: 25%;
+    border-radius: 10%;
 }
 
 .citiesOwned {
     width: 50%;
     height: 100%;
-    border: 3px solid green;
+    backdrop-filter: blur(5px);
 }
 
 .citiesOwned .city {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: flex-end;
-    background: white;
+    background-image: url('https://i.imgur.com/gl6Fxl8.jpg');
+    background-size: cover;
     height: 20%;
     width: 100%;
     margin-bottom: 30px;
@@ -193,6 +242,38 @@ body {
 
 .cityTroops, .cityTitle {
     margin-bottom: 5px;
+    color: white;
+}
+
+.hlink {
+    margin-bottom: 5px;
+}
+
+.troopReserves {
+    left: 600px;
+    font-size: medium;
+}
+
+.helpPage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoSection {
+    width: 40%;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    background-color: thistle;
+    border-radius: 5%;
+    border: 2px solid black;
+    
+}
+
+.infoSection h1 {
+    text-align: center;
 }
 
 
@@ -271,6 +352,13 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 
 .hidden {
     display: none;
