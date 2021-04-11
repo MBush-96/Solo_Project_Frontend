@@ -343,6 +343,53 @@ body {
     text-align: center;
 }
 
+.attackUsersPageContainer {
+    margin: 50px 500px;
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, .3);
+    backdrop-filter: blur(7px);
+}
+
+.userCityAttackPane {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+}
+
+.userCityAttackPaneInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 90%;
+    padding-left: 20px;
+    color: white
+}
+
+.userCityAttackPaneInfo h2, h3 {
+    margin-bottom: 0px;
+}
+
+.attackUsersPageContainer img {
+    border: 3px solid white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.userCityAttackPane button {
+    width: 10%;
+    height: 30%;
+    background-color: red;
+    font-family: 'Fjalla One', sans-serif;
+    border: none;
+}
+
+.userCityAttackPane button:hover {
+    cursor: pointer;
+}
+
 #loginFormBtn {
     width: 40%;
     height: 5vh;

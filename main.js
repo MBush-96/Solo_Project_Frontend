@@ -12,7 +12,7 @@ let troopsInReserves = document.querySelector('.troopsInReserves').innerText
 
 const showIfLoggedIn = []
 const hideIfLoggedOut = []
-const showIfLoggedOut = [createAccountBtn, loginBtn]
+const showIfLoggedOut = [createAccountBtn, loginBtn, attackUsersPage]
 const hideIfLoggedIn = [createAccount, loginAccount, createAccountBtn, loginBtn]
 const headerLinks = document.querySelectorAll('.hlink')
 headerLinks.forEach(item => {
@@ -55,6 +55,7 @@ document.querySelector('.seeUsersLink').addEventListener('click', async () => {
     helpPage.classList.add('hidden')
     noCityPopup.classList.add('hidden')
     seeUsersPage.classList.remove('hidden')
+    attackUsersPage.classList.add('hidden')
 })
 
 document.querySelector('.attackLink').addEventListener('click', async () => {
@@ -62,6 +63,11 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
     profilePage.classList.add('hidden')
     seeUsersPage.classList.add('hidden')
     noCityPopup.classList.add('hidden')
+    attackUsersPage.classList.remove('hidden')
+    const attackUsersPageContainer = document.querySelector('.attackUsersPageContainer')
+    while (attackUsersPageContainer.firstChild !== null) {
+        attackUsersPageContainer.removeChild(attackUsersPageContainer.lastChild)
+    }
 
     //contains all cities owned by users
     const userCities = []
@@ -84,7 +90,7 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
             //get Owner Of City
             let user = await axios.get(`${URL}user/${cityPath[j].userId}`)
             const userPath = user.data.user
-            
+
             //create Divs To Display
             const newDiv = document.createElement('div')
             const userCityInfoDiv = document.createElement('div')
@@ -94,10 +100,15 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
             const cityName = document.createElement('h3')
             const attackButton = document.createElement('button')
 
+            newDiv.classList.add('userCityAttackPane')
+            userCityInfoDiv.classList.add('userCityAttackPaneInfo')
+            userAvatarDiv.classList.add('UserCityAttackPaneAvatar')
+            attackButton.classList.add('userCityAttackPaneBtn')
+
             userProfileImg.src = userPath.profileImgSrc
             usersName.innerText = userPath.username
             cityName.innerText = cityPath[j].name
-            attackButton.value = 'War'
+            attackButton.innerText = 'War'
 
             userAvatarDiv.appendChild(userProfileImg)
 
@@ -118,6 +129,7 @@ document.querySelector('.help').addEventListener('click', e => {
     profilePage.classList.add('hidden')
     seeUsersPage.classList.add('hidden')
     noCityPopup.classList.add('hidden')
+    attackUsersPage.classList.add('hidden')
 })
 
 document.querySelector('.logoutLink').addEventListener('click', () => {
@@ -137,6 +149,7 @@ document.querySelector('#loginForm').addEventListener('submit', e => {
     e.preventDefault()
     const username = document.querySelector('#usernameFieldLogin')
     const password = document.querySelector('#passwordFieldLogin')
+    console.log(password.value);
     axios.post(`${URL}user/login`, {
         username: username.value,
         password: password.value
@@ -192,6 +205,7 @@ document.querySelector('.profileLink').addEventListener('click', () => {
     profilePage.classList.remove('hidden')
     helpPage.classList.add('hidden')
     seeUsersPage.classList.add('hidden')
+    attackUsersPage.classList.add('hidden')
 })
 
 document.querySelector('.trainInfantryForm').addEventListener('submit', e => {
