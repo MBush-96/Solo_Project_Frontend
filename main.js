@@ -7,6 +7,7 @@ const helpPage = document.querySelector('.helpPage')
 const profilePage = document.querySelector('.profilePage')
 const seeUsersPage = document.querySelector('.seeUsersPage')
 const noCityPopup = document.querySelector('.profileCreateCityPopup')
+const attackUsersPage = document.querySelector('.attackUsersPage')
 let troopsInReserves = document.querySelector('.troopsInReserves').innerText
 
 const showIfLoggedIn = []
@@ -39,7 +40,7 @@ document.querySelector('.seeUsersLink').addEventListener('click', async () => {
 
         userName.innerText = user.username
         userReserveTroops.innerText = `Reserve Troops: ${user.infantryInReserve}`
-        profilePic.src = 'https://i.imgur.com/CWExPZG.png'
+        profilePic.src = user.profileImgSrc
         
         userInfoDiv.appendChild(userName)
         userInfoDiv.appendChild(userReserveTroops)
@@ -54,8 +55,62 @@ document.querySelector('.seeUsersLink').addEventListener('click', async () => {
     helpPage.classList.add('hidden')
     noCityPopup.classList.add('hidden')
     seeUsersPage.classList.remove('hidden')
+})
 
-    
+document.querySelector('.attackLink').addEventListener('click', async () => {
+    helpPage.classList.add('hidden')
+    profilePage.classList.add('hidden')
+    seeUsersPage.classList.add('hidden')
+    noCityPopup.classList.add('hidden')
+
+    //contains all cities owned by users
+    const userCities = []
+
+    // get user information
+    const userCall = await getAllUserInfo()
+    //console.log(userCall);
+
+    // get cities
+    for(let user of userCall) {
+        let city = await getUserCities(user.id)
+        userCities.push(city)
+    }
+
+    // Loop through userCities
+    for(let i in userCities) {
+        const cityPath = userCities[i].data.city
+        // Loop through to each city
+        for(let j in cityPath) {
+            //get Owner Of City
+            let user = await axios.get(`${URL}user/${cityPath[j].userId}`)
+            const userPath = user.data.user
+            
+            //create Divs To Display
+            const newDiv = document.createElement('div')
+            const userCityInfoDiv = document.createElement('div')
+            const userAvatarDiv = document.createElement('div')
+            const userProfileImg = document.createElement('img')
+            const usersName = document.createElement('h2')
+            const cityName = document.createElement('h3')
+            const attackButton = document.createElement('button')
+
+            userProfileImg.src = userPath.profileImgSrc
+            usersName.innerText = userPath.username
+            cityName.innerText = cityPath[j].name
+            attackButton.value = 'War'
+
+            userAvatarDiv.appendChild(userProfileImg)
+
+            userCityInfoDiv.appendChild(usersName)
+            userCityInfoDiv.appendChild(cityName)
+            userCityInfoDiv.appendChild(attackButton)
+
+            newDiv.appendChild(userAvatarDiv)
+            newDiv.appendChild(userCityInfoDiv)
+
+            document.querySelector('.attackUsersPageContainer').appendChild(newDiv)
+        }
+    }
 })
 
 document.querySelector('.help').addEventListener('click', e => {
@@ -210,6 +265,12 @@ const getAllUserInfo = async () => {
     return users
 }
 
+const getUserCities = async userId => {
+    const city = await axios.get(`${URL}city/${userId}`)
+    return city
+}
+
+//used for profile page
 const getAllUserCities = async () => {
     const response = await axios.get(`${URL}city/${localStorage.getItem('userIn')}`)
     if (response.data.city.length === 0) {
