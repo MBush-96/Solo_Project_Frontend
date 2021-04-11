@@ -5,6 +5,8 @@ const createAccountBtn = document.querySelector('#createAccountBtn')
 const loginBtn = document.querySelector('#loginBtn')
 const helpPage = document.querySelector('.helpPage')
 const profilePage = document.querySelector('.profilePage')
+const seeUsersPage = document.querySelector('.seeUsersPage')
+const noCityPopup = document.querySelector('.profileCreateCityPopup')
 let troopsInReserves = document.querySelector('.troopsInReserves').innerText
 
 const showIfLoggedIn = []
@@ -17,9 +19,41 @@ headerLinks.forEach(item => {
     showIfLoggedIn.push(item)
 })
 
+document.querySelector('.seeUsersLink').addEventListener('click', async () => {
+    // Display each user
+    while (seeUsersPage.firstChild !== null) {
+        seeUsersPage.removeChild(seeUsersPage.lastChild)
+    }
+    const users = await getAllUserInfo()
+    users.forEach(user => {
+        const newDiv = document.createElement('div')
+        const userName = document.createElement('h2')
+        const userReserveTroops = document.createElement('p')
+        
+        
+        newDiv.classList.add('seeUsersPageUser')
+        userName.innerText = user.username
+        userReserveTroops.innerText = `Reserve Troops: ${user.infantryInReserve}`
+        
+        newDiv.appendChild(userName)
+        newDiv.appendChild(userReserveTroops)
+        
+        seeUsersPage.appendChild(newDiv)
+        
+    })
+    profilePage.classList.add('hidden')
+    helpPage.classList.add('hidden')
+    noCityPopup.classList.add('hidden')
+    seeUsersPage.classList.remove('hidden')
+
+    
+})
+
 document.querySelector('.help').addEventListener('click', e => {
     helpPage.classList.remove('hidden')
     profilePage.classList.add('hidden')
+    seeUsersPage.classList.add('hidden')
+    noCityPopup.classList.add('hidden')
 })
 
 document.querySelector('.logoutLink').addEventListener('click', () => {
@@ -66,6 +100,8 @@ document.querySelector('#createAccountForm').addEventListener('submit', e => {
     axios.post(`${URL}user`, {
         username: username.value,
         password: password.value
+    }).then(res => {
+        console.log(res);
     })
     username.value = null
     password.value = null
@@ -73,6 +109,7 @@ document.querySelector('#createAccountForm').addEventListener('submit', e => {
 
 document.querySelector('#createCityForm').addEventListener('submit', e => {
     e.preventDefault()
+    profilePage.classList.add('hidden')
     const cityName = document.querySelector('.createCityName')
     const userId = localStorage.getItem('userIn')
     axios.post(`${URL}city`, {
@@ -82,13 +119,14 @@ document.querySelector('#createCityForm').addEventListener('submit', e => {
     }).then(res => {
         displayAllUserCities()
     })
+    profilePage.classList.remove('hidden')
     document.querySelector('.profileCreateCityPopup').classList.add('hidden')
 })
 
 document.querySelector('.profileLink').addEventListener('click', () => {
     getAllUserCities()
-    document.querySelector('.profilePage').classList.remove('hidden')
     helpPage.classList.add('hidden')
+    seeUsersPage.classList.add('hidden')
 })
 
 document.querySelector('.trainInfantryForm').addEventListener('submit', e => {
@@ -156,10 +194,17 @@ const displayAllUserCities = async () => {
     }
 }
 
+const getAllUserInfo = async () => {
+    const response =  await axios.get(`${URL}user`)
+    const users = response.data.users
+    return users
+}
+
 const getAllUserCities = async () => {
     const response = await axios.get(`${URL}city/${localStorage.getItem('userIn')}`)
     if (response.data.city.length === 0) {
         document.querySelector('.profileCreateCityPopup').classList.remove('hidden')
+        profilePage.classList.add('hidden')
     } else {
         displayAllUserCities()
     }

@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    font-family: 'Fjalla One', sans-serif;
 }
 body {
     background-image: url('https://i.imgur.com/6W12U8T.jpg');
@@ -207,6 +208,23 @@ body {
 
 .trainInfantryField:focus {
     outline: none;
+}
+
+.seeUsersPage {
+    margin: auto 400px;
+    display: flex;
+    margin-top: 10px;
+    border: 3px solid green;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    flex-direction: row;
+}
+
+.seeUsersPageUser {
+    border: 3px solid red;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
 }
 
 #trainInfantryFieldBtn:hover {
