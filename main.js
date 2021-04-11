@@ -4,6 +4,7 @@ const loginAccount = document.querySelector('.loginToAccount')
 const createAccountBtn = document.querySelector('#createAccountBtn')
 const loginBtn = document.querySelector('#loginBtn')
 const helpPage = document.querySelector('.helpPage')
+const profilePage = document.querySelector('.profilePage')
 let troopsInReserves = document.querySelector('.troopsInReserves').innerText
 
 const showIfLoggedIn = []
@@ -14,6 +15,11 @@ const headerLinks = document.querySelectorAll('.hlink')
 headerLinks.forEach(item => {
     hideIfLoggedOut.push(item)
     showIfLoggedIn.push(item)
+})
+
+document.querySelector('.help').addEventListener('click', e => {
+    helpPage.classList.remove('hidden')
+    profilePage.classList.add('hidden')
 })
 
 document.querySelector('.logoutLink').addEventListener('click', () => {

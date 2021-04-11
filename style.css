@@ -223,6 +223,10 @@ body {
     border: none;
 }
 
+.stationTroopsForm {
+    backdrop-filter: blur(5px);
+}
+
 .stationTroopsField {
     margin: 5px 10px 20px 0px;
 }
@@ -248,7 +252,6 @@ body {
 .citiesOwned {
     width: 50%;
     height: 100%;
-    backdrop-filter: blur(5px);
 }
 
 .citiesOwned .city {
@@ -314,6 +317,10 @@ body {
     border-radius: 11%;
 }
 
+#loginFormBtn:hover {
+    cursor: pointer;
+}
+
 #loginBtn {
     width: 20%;
     height: 6vh;
@@ -324,6 +331,10 @@ body {
     font-size: x-large;
     border: 2px;
     margin-top: 30px;
+}
+
+#loginBtn:hover {
+    cursor: pointer;
 }
 
 #loginForm {
