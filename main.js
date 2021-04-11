@@ -27,17 +27,26 @@ document.querySelector('.seeUsersLink').addEventListener('click', async () => {
     const users = await getAllUserInfo()
     users.forEach(user => {
         const newDiv = document.createElement('div')
+        const userInfoDiv = document.createElement('div')
         const userName = document.createElement('h2')
         const userReserveTroops = document.createElement('p')
+        const profilePictureDiv = document.createElement('div')
+        const profilePic = document.createElement('img')
         
-        
+        userInfoDiv.classList.add('userInfoDivSU')
+        profilePictureDiv.classList.add('pPDiv')
         newDiv.classList.add('seeUsersPageUser')
+
         userName.innerText = user.username
         userReserveTroops.innerText = `Reserve Troops: ${user.infantryInReserve}`
+        profilePic.src = 'https://i.imgur.com/CWExPZG.png'
         
-        newDiv.appendChild(userName)
-        newDiv.appendChild(userReserveTroops)
+        userInfoDiv.appendChild(userName)
+        userInfoDiv.appendChild(userReserveTroops)
+        profilePictureDiv.appendChild(profilePic)
         
+        newDiv.appendChild(profilePictureDiv)
+        newDiv.appendChild(userInfoDiv)
         seeUsersPage.appendChild(newDiv)
         
     })
@@ -125,6 +134,7 @@ document.querySelector('#createCityForm').addEventListener('submit', e => {
 
 document.querySelector('.profileLink').addEventListener('click', () => {
     getAllUserCities()
+    profilePage.classList.remove('hidden')
     helpPage.classList.add('hidden')
     seeUsersPage.classList.add('hidden')
 })
