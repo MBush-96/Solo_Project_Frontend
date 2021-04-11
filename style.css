@@ -220,6 +220,29 @@ body {
     width: 45%;
     height: 25%;
     border-radius: 10%;
+    border: none;
+}
+
+.stationTroopsField {
+    margin: 5px 10px 20px 0px;
+}
+
+.stationTroopsField:focus {
+    outline: none;
+}
+
+.stationTroopsBtn {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    background-color: red;
+    color: white;
+    border-radius: 8%;
+    border: none;
+    padding: 5px;
+}
+
+.stationTroopsBtn:hover {
+    cursor: pointer;
 }
 
 .citiesOwned {
@@ -237,7 +260,7 @@ body {
     background-size: cover;
     height: 20%;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
 }
 
 .cityTroops, .cityTitle {
@@ -252,6 +275,11 @@ body {
 .troopReserves {
     left: 600px;
     font-size: medium;
+}
+
+.troopReserves:hover {
+    color: white !important;
+    cursor: default !important;
 }
 
 .helpPage {
@@ -275,7 +303,6 @@ body {
 .infoSection h1 {
     text-align: center;
 }
-
 
 #loginFormBtn {
     width: 40%;
