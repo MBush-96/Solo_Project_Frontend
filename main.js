@@ -246,56 +246,55 @@ document.querySelector('.trainInfantryForm').addEventListener('submit', e => {
 
 const displayAllUserCities = async () => {
     const cities = await axios.get(`${URL}city/${localStorage.getItem('userIn')}`)
+    console.log(cities);
     const cityPath = cities.data.city
     for(let i in cityPath) {
-        if(document.querySelector('.citiesOwned').children.length === 0) {
-            const newDiv = document.createElement('div')
-            const cityTitle = document.createElement('h2')
-            const cityTroops = document.createElement('p')
-            const stationTroopsAtCity = document.createElement('form')
-            const formInputField = document.createElement('input')
-            const formInputSubmitBtn = document.createElement('input')
-            
-            //add city id to form class to be used to send to DB
-            stationTroopsAtCity.id = `${cityPath[i].id}`
-            stationTroopsAtCity.classList.add('stationTroopsForm')
-            formInputField.classList.add('stationTroopsField')
-            formInputField.type = 'number'
-            formInputField.placeholder = cityPath[i].name
-            formInputSubmitBtn.classList.add('stationTroopsBtn')
-            formInputSubmitBtn.type = 'submit'
-            formInputSubmitBtn.value = 'Station Troops'
-            
-            newDiv.classList.add('city')
-            cityTitle.classList.add('cityTitle')
-            cityTroops.classList.add('cityTroops')
-            
-            cityTitle.innerText = cityPath[i].name
-            cityTroops.innerText = `Stationed Troops: ${cityPath[i].infantryInCity}`
-            
-            stationTroopsAtCity.appendChild(formInputField)
-            stationTroopsAtCity.appendChild(formInputSubmitBtn)
+        const newDiv = document.createElement('div')
+        const cityTitle = document.createElement('h2')
+        const cityTroops = document.createElement('p')
+        const stationTroopsAtCity = document.createElement('form')
+        const formInputField = document.createElement('input')
+        const formInputSubmitBtn = document.createElement('input')
+        
+        //add city id to form class to be used to send to DB
+        stationTroopsAtCity.id = `${cityPath[i].id}`
+        stationTroopsAtCity.classList.add('stationTroopsForm')
+        formInputField.classList.add('stationTroopsField')
+        formInputField.type = 'number'
+        formInputField.placeholder = cityPath[i].name
+        formInputSubmitBtn.classList.add('stationTroopsBtn')
+        formInputSubmitBtn.type = 'submit'
+        formInputSubmitBtn.value = 'Station Troops'
+        
+        newDiv.classList.add('city')
+        cityTitle.classList.add('cityTitle')
+        cityTroops.classList.add('cityTroops')
+        
+        cityTitle.innerText = cityPath[i].name
+        cityTroops.innerText = `Stationed Troops: ${cityPath[i].infantryInCity}`
+        
+        stationTroopsAtCity.appendChild(formInputField)
+        stationTroopsAtCity.appendChild(formInputSubmitBtn)
 
-            newDiv.appendChild(cityTitle)
-            newDiv.appendChild(cityTroops)
-            document.querySelector('.citiesOwned').appendChild(newDiv)
-            document.querySelector('.citiesOwned').appendChild(stationTroopsAtCity)
+        newDiv.appendChild(cityTitle)
+        newDiv.appendChild(cityTroops)
+        document.querySelector('.citiesOwned').appendChild(newDiv)
+        document.querySelector('.citiesOwned').appendChild(stationTroopsAtCity)
 
-            // add event listener to form when it is created
-            stationTroopsAtCity.addEventListener('submit', e => {
-                e.preventDefault()
-                if(troopsInReserves >= formInputField.value) {
-                    axios.put(`${URL}city/${stationTroopsAtCity.id}`, {
-                        infantryInCity: formInputField.value
-                    }).then(res => {
-                        console.log(res);
-                    })
-                } else {
-                    formInputField.value = null
-                    formInputField.placeholder = 'You didnt have enough troops'
-                }
-            })
-        }
+        // add event listener to form when it is created
+        stationTroopsAtCity.addEventListener('submit', e => {
+            e.preventDefault()
+            if(troopsInReserves >= formInputField.value) {
+                axios.put(`${URL}city/${stationTroopsAtCity.id}`, {
+                    infantryInCity: formInputField.value
+                }).then(res => {
+                    console.log(res);
+                })
+            } else {
+                formInputField.value = null
+                formInputField.placeholder = 'You didnt have enough troops'
+            }
+        })
     }
 }
 
@@ -328,7 +327,6 @@ const deleteTroops = async casualties => {
     console.log(response);
 }
 
-// this does not completly work DNF sunday
 const warInit = async (cityOwner, city, attackButton) => {
     const cityContainerModal = document.querySelector('.userCityContainerModal')
     while (cityContainerModal.firstChild !== null) {
