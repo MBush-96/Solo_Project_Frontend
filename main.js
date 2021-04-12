@@ -1,4 +1,4 @@
-const URL = 'http://localhost:3001/'
+const URL = 'https://wargame-backend.herokuapp.com/'
 const createAccount = document.querySelector('.createAccount')
 const loginAccount = document.querySelector('.loginToAccount')
 const createAccountBtn = document.querySelector('#createAccountBtn')
