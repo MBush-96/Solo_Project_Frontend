@@ -4,6 +4,7 @@ const app = express()
 const routesReport = require('rowdy-logger').begin(app)
 
 const path = require('path')
+const replaceInFile = require('replace-in-file')
 
 app.get('/', (req, res) => {
   const filepath = path.join(__dirname, 'index.html')
@@ -12,6 +13,15 @@ app.get('/', (req, res) => {
 
 app.get('/main.js', (req, res) => {
   const filepath = path.join(__dirname, 'main.js')
+
+  if (process.env.NODE_ENV === 'production') {
+    await replaceInFile({
+      files: filepath,
+      from: 'http://localhost:3001/',
+      to: 'https://wargame-backend.herokuapp.com' 
+    })
+  }
+  
   res.sendFile(filepath)
 })
 
