@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.sendFile(filepath)
 })
 
-app.get('/main.js', async (req, res, next) => {
+app.get('/main.js', async (req, res) => {
   const filepath = path.join(__dirname, 'main.js')
 
   if (process.env.NODE_ENV === 'production') {
@@ -21,7 +21,7 @@ app.get('/main.js', async (req, res, next) => {
       to: 'https://wargame-backend.herokuapp.com' 
     })
   }
-  next()
+
   res.sendFile(filepath)
 })
 
