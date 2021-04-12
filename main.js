@@ -102,9 +102,10 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
 
             newDiv.classList.add('userCityAttackPane')
             userCityInfoDiv.classList.add('userCityAttackPaneInfo')
-            userAvatarDiv.classList.add('UserCityAttackPaneAvatar')
+            userAvatarDiv.classList.add('userCityAttackPaneAvatar')
             attackButton.classList.add('userCityAttackPaneBtn')
 
+            newDiv.classList.add('usersAttackPane')
             userProfileImg.src = userPath.profileImgSrc
             usersName.innerText = userPath.username
             cityName.innerText = cityPath[j].name
@@ -123,6 +124,26 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
 
             attackButton.addEventListener('click', () => {
                 warInit(userPath, cityPath[j], attackButton)
+                // Get the modal
+                const modal = document.querySelector(".initWarModal")
+                
+                // Get the <span> element that closes the modal
+                const span = document.getElementsByClassName("close")[0]
+                
+                // When the user clicks on the button, open the modal
+                modal.style.display = "block";
+                
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = () => {
+                    modal.style.display = "none";
+                }
+                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = event => {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
             })
         }
     }
@@ -186,6 +207,7 @@ document.querySelector('#createAccountForm').addEventListener('submit', e => {
     })
     username.value = null
     password.value = null
+    document.querySelector('.createAccount').classList.add('hidden')
 })
 
 document.querySelector('#createCityForm').addEventListener('submit', e => {
@@ -306,43 +328,98 @@ const deleteTroops = async casualties => {
     console.log(response);
 }
 
+// this does not completly work DNF sunday
 const warInit = async (cityOwner, city, attackButton) => {
+    const cityContainerModal = document.querySelector('.userCityContainerModal')
+    while (cityContainerModal.firstChild !== null) {
+        cityContainerModal.removeChild(cityContainerModal.lastChild)
+    }
+    const avatarModalDiv = document.createElement('div')
+    const cityInfoModalDiv = document.createElement('div')
     const profileImg = document.createElement('img')
     const cityName = document.createElement('p')
     const username = document.createElement('h2')
-    console.log(cityOwner.username);
+    const confirmWarForm = document.createElement('form')
+    const confirmWarFormDiv = document.createElement('div')
+    const sendTroopsInput = document.createElement('input')
+    const sendTroopsBtn = document.createElement('input')
+    
+    const warModalContent = document.querySelector('.initWarModal_Content')
+    if (warModalContent.lastChild === document.querySelector('.confirmWarFormDiv')) {
+        warModalContent.removeChild(warModalContent.lastChild)
+    }
+
+    confirmWarFormDiv.classList.add('confirmWarFormDiv')
+    sendTroopsBtn.classList.add('sendTroopsBtnModal')
+    sendTroopsInput.classList.add('sendTroopsInputFormModal')
+    confirmWarForm.classList.add('confirmWarFormModal')
+    username.classList.add('attackUserModalUsername')
+    cityName.classList.add('attackUserModalCityTitle')
+    cityInfoModalDiv.classList.add('userCityInfoModal')
+    avatarModalDiv.classList.add('userAvatarModal')
+    
     username.innerText = cityOwner.username
     cityName.innerText = city.name
     profileImg.src = cityOwner.profileImgSrc
+    sendTroopsInput.type = 'number'
+    sendTroopsBtn.type = 'submit'
+    sendTroopsBtn.value = 'March'
+    sendTroopsInput.placeholder = 'Number of troops to send'
+
     
-    document.querySelector('.userAvatarModal').appendChild(profileImg)
-    document.querySelector('.userCityInfoModal').appendChild(username)
-    document.querySelector('.userCityInfoModal').appendChild(cityName)
+    avatarModalDiv.appendChild(profileImg)
+    cityInfoModalDiv.appendChild(username)
+    cityInfoModalDiv.appendChild(cityName)
+    confirmWarForm.appendChild(sendTroopsInput)
+    confirmWarForm.appendChild(sendTroopsBtn)
+    cityContainerModal.appendChild(avatarModalDiv)
+    cityContainerModal.appendChild(cityInfoModalDiv)
+    confirmWarFormDiv.appendChild(confirmWarForm)
+    document.querySelector('.initWarModal_Content').appendChild(confirmWarFormDiv)
     
-    // Get the modal
-    const modal = document.querySelector(".initWarModal")
+    confirmWarFormDiv.addEventListener('submit', e => {
+        e.preventDefault()
+        //make a modal for this gif
+        const swordGif = document.createElement('img')
+        swordGif.src = "https://media.giphy.com/media/R5AY6wDCytA7ijDrtT/source.gif"
+        
+        setTimeout(() => {
+            document.querySelector('.initWarModal').style.display = 'none'
+        }, 1000);
+        
+        war(cityOwner, city, sendTroopsInput.value)
+    })
+}
+
+const war = async (cityOwner, city, troopsMarching) => {
+    const getAttackingUser = await axios.get(`${URL}user/${localStorage.getItem('userIn')}`)
+    const attackingUser = getAttackingUser.data.user
+    console.log(city);
+    console.log(cityOwner);
+    console.log(attackingUser);
+    let troopsInCity = city.infantryInCity
+    let attackingTroops = parseInt(troopsMarching, 10)
+
+    const rmTroops = await axios.put(`${URL}user/${localStorage.getItem('userIn')}/troops`, {
+        infantryInReserve: attackingTroops
+    })
     
-    // Get the button that opens the modal
-    const btn = attackButton
-    
-    // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0]
-    
-    // When the user clicks on the button, open the modal
-    btn.onclick = () => {
-        modal.style.display = "block";
-    }
-    
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = () => {
-        modal.style.display = "none";
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = event => {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+    //remove dead troops if city has more defenders
+    if (troopsInCity > attackingTroops) {
+        await axios.put(`${URL}city/${city.id}/troops`, {
+            infantryInCity: troopsInCity - attackingTroops
+        })
+    } else if (troopsInCity < attackingTroops) {
+        await axios.put(`${URL}city/${city.id}/troops`, {
+            infantryInCity: attackingTroops - troopsInCity
+        })
+        await axios.put(`${URL}city/${city.id}/owner`, {
+            newOwner: attackingUser.id
+        })
+    } else if (troopsInCity === attackingTroops) {
+        await axios.put(`${URL}city/${city.id}/troops`, {
+            infantryInCity: 0
+        })
     }
 }
 
