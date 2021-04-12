@@ -284,7 +284,8 @@ const displayAllUserCities = async () => {
         // add event listener to form when it is created
         stationTroopsAtCity.addEventListener('submit', e => {
             e.preventDefault()
-            if(troopsInReserves >= formInputField.value) {
+            const reserveTroops = parseInt(document.querySelector('.reserveTroopsLinkBar').innerText)
+            if(reserveTroops >= formInputField.value) {
                 axios.put(`${URL}city/${stationTroopsAtCity.id}`, {
                     infantryInCity: formInputField.value
                 }).then(res => {
@@ -439,7 +440,7 @@ if(localStorage.getItem('userIn')) {
 if(localStorage.getItem('userIn')) {
     setInterval(() => {
         axios.get(`${URL}user/${localStorage.getItem('userIn')}`).then(res => {
-            document.querySelector('.troopReserves').innerText = `Troops in reserves: ${res.data.user.infantryInReserve}`
+            document.querySelector('.troopReserves').innerHTML = `Troops in reserves: <span class='reserveTroopsLinkBar'>${res.data.user.infantryInReserve}</span>`
         })
     }, 1000);
 }
