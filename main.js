@@ -76,7 +76,7 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
     const userCall = await getAllUserInfo()
     //console.log(userCall);
 
-    // get cities
+    // get cities and push them to userCities array
     for(let user of userCall) {
         let city = await getUserCities(user.id)
         userCities.push(city)
@@ -85,7 +85,7 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
     // Loop through userCities
     for(let i in userCities) {
         const cityPath = userCities[i].data.city
-        // Loop through to each city
+        // Loop through to city
         for(let j in cityPath) {
             //get Owner Of City
             let user = await axios.get(`${URL}user/${cityPath[j].userId}`)
@@ -120,6 +120,10 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
             newDiv.appendChild(userCityInfoDiv)
 
             document.querySelector('.attackUsersPageContainer').appendChild(newDiv)
+
+            attackButton.addEventListener('click', () => {
+                warInit(userPath, cityPath[j], attackButton)
+            })
         }
     }
 })
@@ -302,6 +306,45 @@ const deleteTroops = async casualties => {
     console.log(response);
 }
 
+const warInit = async (cityOwner, city, attackButton) => {
+    const profileImg = document.createElement('img')
+    const cityName = document.createElement('p')
+    const username = document.createElement('h2')
+    console.log(cityOwner.username);
+    username.innerText = cityOwner.username
+    cityName.innerText = city.name
+    profileImg.src = cityOwner.profileImgSrc
+    
+    document.querySelector('.userAvatarModal').appendChild(profileImg)
+    document.querySelector('.userCityInfoModal').appendChild(username)
+    document.querySelector('.userCityInfoModal').appendChild(cityName)
+    
+    // Get the modal
+    const modal = document.querySelector(".initWarModal")
+    
+    // Get the button that opens the modal
+    const btn = attackButton
+    
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("close")[0]
+    
+    // When the user clicks on the button, open the modal
+    btn.onclick = () => {
+        modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = () => {
+        modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = event => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
 
 if(localStorage.getItem('userIn')) {
     hideIfLoggedIn.forEach(item => {
