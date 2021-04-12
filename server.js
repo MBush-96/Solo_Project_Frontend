@@ -21,7 +21,7 @@ app.get('/main.js', (req, res) => {
       to: 'https://wargame-backend.herokuapp.com' 
     })
   }
-  
+  next()
   res.sendFile(filepath)
 })
 
@@ -30,7 +30,7 @@ app.get('/style.css', (req, res) => {
   res.type('css').sendFile(filepath)
 })
 
-const port = process.env.PORT || 3000
-app.listen(port, () => {
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
     routesReport.print()
 })
