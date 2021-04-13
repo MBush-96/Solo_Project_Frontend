@@ -248,6 +248,12 @@ const displayAllUserCities = async () => {
     const cities = await axios.get(`${URL}city/${localStorage.getItem('userIn')}`)
     console.log(cities);
     const cityPath = cities.data.city
+    const citiesOwnedDiv = document.querySelector('.citiesOwned')
+
+    while(citiesOwnedDiv.firstChild !== null) {
+        citiesOwnedDiv.removeChild(citiesOwnedDiv.lastChild)
+    }
+
     for(let i in cityPath) {
         const newDiv = document.createElement('div')
         const cityTitle = document.createElement('h2')
@@ -257,7 +263,7 @@ const displayAllUserCities = async () => {
         const formInputSubmitBtn = document.createElement('input')
         
         //add city id to form class to be used to send to DB
-        stationTroopsAtCity.id = `${cityPath[i].id}`
+        stationTroopsAtCity.classList.add(`${cityPath[i].id}`)
         stationTroopsAtCity.classList.add('stationTroopsForm')
         formInputField.classList.add('stationTroopsField')
         formInputField.type = 'number'
@@ -268,7 +274,8 @@ const displayAllUserCities = async () => {
         
         newDiv.classList.add('city')
         cityTitle.classList.add('cityTitle')
-        cityTroops.classList.add('cityTroops')
+        cityTroops.classList.add(`cityTroops${i}`)
+        cityTroops.classList.add(`cityTroops`)
         
         cityTitle.innerText = cityPath[i].name
         cityTroops.innerText = `Stationed Troops: ${cityPath[i].infantryInCity}`
@@ -278,15 +285,15 @@ const displayAllUserCities = async () => {
 
         newDiv.appendChild(cityTitle)
         newDiv.appendChild(cityTroops)
-        document.querySelector('.citiesOwned').appendChild(newDiv)
-        document.querySelector('.citiesOwned').appendChild(stationTroopsAtCity)
+        citiesOwnedDiv.appendChild(newDiv)
+        citiesOwnedDiv.appendChild(stationTroopsAtCity)
 
         // add event listener to form when it is created
         stationTroopsAtCity.addEventListener('submit', e => {
             e.preventDefault()
             const reserveTroops = parseInt(document.querySelector('.reserveTroopsLinkBar').innerText)
             if(reserveTroops >= formInputField.value) {
-                axios.put(`${URL}city/${stationTroopsAtCity.id}`, {
+                axios.put(`${URL}city/${stationTroopsAtCity.classList[0]}`, {
                     infantryInCity: formInputField.value
                 }).then(res => {
                     console.log(res);
@@ -296,6 +303,11 @@ const displayAllUserCities = async () => {
                 formInputField.placeholder = 'You didnt have enough troops'
             }
         })
+        // setInterval(() => {
+        //     axios.get(`${URL}city/${localStorage.getItem('userIn')}`).then(res => {
+        //         cityTroops.innerText = `Stationed Troops: ${res.data.city[i].infantryInCity}` 
+        //     }) 
+        // }, 1000);
     }
 }
 
@@ -442,5 +454,10 @@ if(localStorage.getItem('userIn')) {
         axios.get(`${URL}user/${localStorage.getItem('userIn')}`).then(res => {
             document.querySelector('.troopReserves').innerHTML = `Troops in reserves: <span class='reserveTroopsLinkBar'>${res.data.user.infantryInReserve}</span>`
         })
+        axios.get(`${URL}city/${localStorage.getItem('userIn')}`).then(res => {
+            for(let i in res.data.city) {
+                document.querySelector(`.cityTroops${i}`).innerText = `Stationed Troops: ${res.data.city[i].infantryInCity}`
+            }
+        }) 
     }, 1000);
 }
