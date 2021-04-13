@@ -20,7 +20,11 @@ body {
     color: white;
     font-size: x-large;
     align-items: flex-end;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.headOfPage .loggedInLinks {
+    margin-left: 40%;
 }
 
 .headOfPage p {
@@ -315,6 +319,7 @@ body {
 .troopReserves {
     left: 600px;
     font-size: medium;
+    margin-top: auto;
 }
 
 .troopReserves:hover {
@@ -526,6 +531,14 @@ body {
 
 .sendTroopsBtnModal:hover {
     cursor: pointer;
+}
+
+.loggedInLinks {
+    display: flex;
+}
+
+.loggedInAccountLinks {
+    display: flex;
 }
 
 #loginFormBtn {

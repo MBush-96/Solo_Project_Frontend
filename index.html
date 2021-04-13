@@ -12,12 +12,16 @@
 </head>
 <body>
     <div class='headOfPage'>
+        <div class='loggedInLinks'>
             <p class="profileLink hlink">Profile</p>
             <p class="seeUsersLink hlink">See users</p>
             <p class="attackLink hlink">Attack</p>
             <p class='help hlink'>Help</p>
-            <p class="logoutLink hlink">Logout</p>
+        </div>
+        <div class='loggedInAccountLinks'>
             <p class='troopReserves hlink'>Troops in reserves: <span class=troopsInReserves>0</span></p>
+            <p class="logoutLink hlink"><span class='usernameLogout'></span>  Logout</p>
+        </div>
     </div>
     <!-- LOGGED OUT HOME PAGE-->
     <div class="loggedOutHome">
@@ -41,7 +45,7 @@
     <!-- LOGGED OUT HOME END -->
     <div class='profileCreateCityPopup hidden'>
         <div class='popup'>
-            <h1 class='popupTitle pTFirstLine'>Greetings <span class='popUpUserName'>${PH_USER}</span> you do not have a city!</h1>
+            <h1 class='popupTitle pTFirstLine'>Welcome <span class='popUpUserName'>${PH_USER}</span>, you do not have a city!</h1>
             <h1 class='popupTitle pTSecondLine'>Create one</h1>
             <form id='createCityForm' autocomplete="off">
                 <input type='text' class='createCityName' placeholder="City Name" spellcheck="false">

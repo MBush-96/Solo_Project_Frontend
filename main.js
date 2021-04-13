@@ -303,11 +303,6 @@ const displayAllUserCities = async () => {
                 formInputField.placeholder = 'You didnt have enough troops'
             }
         })
-        // setInterval(() => {
-        //     axios.get(`${URL}city/${localStorage.getItem('userIn')}`).then(res => {
-        //         cityTroops.innerText = `Stationed Troops: ${res.data.city[i].infantryInCity}` 
-        //     }) 
-        // }, 1000);
     }
 }
 
@@ -325,7 +320,10 @@ const getUserCities = async userId => {
 //used for profile page
 const getAllUserCities = async () => {
     const response = await axios.get(`${URL}city/${localStorage.getItem('userIn')}`)
+    const userResponse = await axios.get(`${URL}user/${localStorage.getItem('userIn')}`)
     if (response.data.city.length === 0) {
+        document.querySelector('.usernameLogout').innerText = `[${userResponse.data.user.username}]`
+        document.querySelector('.popUpUserName').innerText = userResponse.data.user.username
         document.querySelector('.profileCreateCityPopup').classList.remove('hidden')
         profilePage.classList.add('hidden')
     } else {
