@@ -51,18 +51,12 @@ document.querySelector('.seeUsersLink').addEventListener('click', async () => {
         seeUsersPage.appendChild(newDiv)
         
     })
-    profilePage.classList.add('hidden')
-    helpPage.classList.add('hidden')
-    noCityPopup.classList.add('hidden')
+    hideAll()
     seeUsersPage.classList.remove('hidden')
-    attackUsersPage.classList.add('hidden')
 })
 
 document.querySelector('.attackLink').addEventListener('click', async () => {
-    helpPage.classList.add('hidden')
-    profilePage.classList.add('hidden')
-    seeUsersPage.classList.add('hidden')
-    noCityPopup.classList.add('hidden')
+    hideAll()
     attackUsersPage.classList.remove('hidden')
     const attackUsersPageContainer = document.querySelector('.attackUsersPageContainer')
     while (attackUsersPageContainer.firstChild !== null) {
@@ -150,11 +144,8 @@ document.querySelector('.attackLink').addEventListener('click', async () => {
 })
 
 document.querySelector('.help').addEventListener('click', e => {
+    hideAll()
     helpPage.classList.remove('hidden')
-    profilePage.classList.add('hidden')
-    seeUsersPage.classList.add('hidden')
-    noCityPopup.classList.add('hidden')
-    attackUsersPage.classList.add('hidden')
 })
 
 document.querySelector('.logoutLink').addEventListener('click', () => {
@@ -179,7 +170,9 @@ document.querySelector('#loginForm').addEventListener('submit', e => {
         username: username.value,
         password: password.value
     }).then(res => {
-        console.log(res);
+        if(res.data.error) {
+            document.querySelector('.incorrectInfoLogin').classList.remove('hidden')
+        }
         localStorage.setItem('userIn', res.data.user.id)
         location.reload()
     })
@@ -199,15 +192,21 @@ document.querySelector('#createAccountForm').addEventListener('submit', e => {
     e.preventDefault()
     const username = document.querySelector('#usernameFieldCa')
     const password = document.querySelector('#passwordFieldCa')
-    axios.post(`${URL}user`, {
-        username: username.value,
-        password: password.value
-    }).then(res => {
-        console.log(res);
-    })
-    username.value = null
-    password.value = null
-    document.querySelector('.createAccount').classList.add('hidden')
+    if(password.value.length <= 20 && password.value.length >= 5
+        && username.value.length >= 4 && username.value.length <= 15) {
+        axios.post(`${URL}user`, {
+            username: username.value,
+            password: password.value
+        }).then(res => {
+            console.log(res);
+        })
+        username.value = null
+        password.value = null
+        document.querySelector('.createAccount').classList.add('hidden')
+    } else {
+        username.setCustomValidity('Username must be 4 - 15 characters')
+        password.setCustomValidity('Password must be 5 - 20 characters')
+    }
 })
 
 document.querySelector('#createCityForm').addEventListener('submit', e => {
@@ -228,10 +227,8 @@ document.querySelector('#createCityForm').addEventListener('submit', e => {
 
 document.querySelector('.profileLink').addEventListener('click', () => {
     getAllUserCities()
+    hideAll()
     profilePage.classList.remove('hidden')
-    helpPage.classList.add('hidden')
-    seeUsersPage.classList.add('hidden')
-    attackUsersPage.classList.add('hidden')
 })
 
 document.querySelector('.trainInfantryForm').addEventListener('submit', e => {
@@ -242,6 +239,24 @@ document.querySelector('.trainInfantryForm').addEventListener('submit', e => {
         infantryInReserve: troops.value
     })
     troops.value = null
+})
+
+document.querySelector('.mailIcon').addEventListener('click', () => {
+    // Get the modal
+    const modal = document.querySelector(".mailModal")
+    const span = document.getElementsByClassName("close")[1]
+
+    modal.style.display = "block";
+    
+    span.onclick = () => {
+        modal.style.display = "none";
+    }
+    
+    window.onclick = event => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 })
 
 const displayAllUserCities = async () => {
@@ -265,6 +280,7 @@ const displayAllUserCities = async () => {
         //add city id to form class to be used to send to DB
         stationTroopsAtCity.classList.add(`${cityPath[i].id}`)
         stationTroopsAtCity.classList.add('stationTroopsForm')
+        formInputField.required = 'true'
         formInputField.classList.add('stationTroopsField')
         formInputField.type = 'number'
         formInputField.placeholder = cityPath[i].name
@@ -298,8 +314,9 @@ const displayAllUserCities = async () => {
                 }).then(res => {
                     console.log(res);
                 })
-            } else {
                 formInputField.value = null
+            } else {
+                formInputField.setCustomValidity("You dont have enough troops")
                 formInputField.placeholder = 'You didnt have enough troops'
             }
         })
@@ -367,6 +384,7 @@ const warInit = async (cityOwner, city, attackButton) => {
     cityInfoModalDiv.classList.add('userCityInfoModal')
     avatarModalDiv.classList.add('userAvatarModal')
     
+    sendTroopsInput.required = 'true'
     username.innerText = cityOwner.username
     cityName.innerText = city.name
     profileImg.src = cityOwner.profileImgSrc
@@ -403,9 +421,6 @@ const warInit = async (cityOwner, city, attackButton) => {
 const war = async (cityOwner, city, troopsMarching) => {
     const getAttackingUser = await axios.get(`${URL}user/${localStorage.getItem('userIn')}`)
     const attackingUser = getAttackingUser.data.user
-    console.log(city);
-    console.log(cityOwner);
-    console.log(attackingUser);
     let troopsInCity = city.infantryInCity
     let attackingTroops = parseInt(troopsMarching, 10)
 
@@ -430,6 +445,18 @@ const war = async (cityOwner, city, troopsMarching) => {
             infantryInCity: 0
         })
     }
+}
+
+const hideAll = () => {
+    loginAccount.classList.add('hidden')
+    createAccount.classList.add('hidden')
+    loginBtn.classList.add('hidden')
+    createAccountBtn.classList.add('hidden')
+    helpPage.classList.add('hidden')
+    profilePage.classList.add('hidden')
+    seeUsersPage.classList.add('hidden')
+    noCityPopup.classList.add('hidden')
+    attackUsersPage.classList.add('hidden')
 }
 
 if(localStorage.getItem('userIn')) {

@@ -19,6 +19,7 @@
             <p class='help hlink'>Help</p>
         </div>
         <div class='loggedInAccountLinks'>
+            <img class='mailIcon' src="https://img.icons8.com/ios-filled/50/000000/apple-mail.png"/>
             <p class='troopReserves hlink'>Troops in reserves: <span class=troopsInReserves>0</span></p>
             <p class="logoutLink hlink"><span class='usernameLogout'></span>  Logout</p>
         </div>
@@ -28,16 +29,17 @@
         <button id="createAccountBtn">Create Account</button>
         <div class="createAccount hidden">
             <form id="createAccountForm" autocomplete="off">
-                <input type='text' class='homepageFieldSize' id='usernameFieldCa' name="usernameFieldCa" placeholder="Username" spellcheck="false"><br>
-                <input type='password' class='homepageFieldSize' id='passwordFieldCa' name="passwordFieldCa" placeholder="Password" spellcheck="false"><br>
+                <input type='text' class='homepageFieldSize' id='usernameFieldCa' name="usernameFieldCa" placeholder="Username" spellcheck="false" required><br>
+                <input type='password' class='homepageFieldSize' id='passwordFieldCa' name="passwordFieldCa" placeholder="Password" spellcheck="false" required><br>
                 <input type='submit' id='caFormBtn' value='Sign Up!'>
             </form>
         </div>
         <button id="loginBtn">Login</button>
         <div class="loginToAccount hidden">
             <form id='loginForm' autocomplete="off">
-                <input type='text' class='homepageFieldSize' id='usernameFieldLogin' name='usernameFieldlogin' placeholder='Username' spellcheck="false"><br>
-                <input type='password' class='homepageFieldSize' id='passwordFieldLogin' name='passwordFieldlogin' placeholder="Password" spellcheck="false"><br>
+                <input type='text' class='homepageFieldSize' id='usernameFieldLogin' name='usernameFieldlogin' placeholder='Username' spellcheck="false" required><br>
+                <input type='password' class='homepageFieldSize' id='passwordFieldLogin' name='passwordFieldlogin' placeholder="Password" spellcheck="false" required><br>
+                <p class='incorrectInfoLogin hidden'>Incorrect username/password</p>
                 <input type='submit' id='loginFormBtn' value='Login'>
             </form>
         </div>
@@ -48,7 +50,7 @@
             <h1 class='popupTitle pTFirstLine'>Welcome <span class='popUpUserName'>${PH_USER}</span>, you do not have a city!</h1>
             <h1 class='popupTitle pTSecondLine'>Create one</h1>
             <form id='createCityForm' autocomplete="off">
-                <input type='text' class='createCityName' placeholder="City Name" spellcheck="false">
+                <input type='text' class='createCityName' placeholder="City Name" spellcheck="false" required>
                 <input type='submit' id='createCityBtn' value='Create City'>
             </form>
         </div>
@@ -58,7 +60,7 @@
             <div class='infantry'>
                 <p>Infantry</p>
                 <form class='trainInfantryForm'>
-                    <input type='number' class='trainInfantryField' placeholder="Number of troops">
+                    <input type='number' class='trainInfantryField' placeholder="Number of troops" required>
                     <input type='submit' id='trainInfantryFieldBtn' value="Train">
                 </form>
             </div>
@@ -70,7 +72,7 @@
             <h1 class=helpTitle>Information</h1>
             <p>1) To begin click on your profile page and create a city, if you dont have one. If you ever lose all of your cities <br />this is how you will restart.</p>
             <p>2) In your profile page you will see all of your cities, below them you will have the ability to send troops from your <br /> reserves to your cities to defend them.</p>
-            <p>3) If you are attacked or attack another player and you have more troops than they have defending, you will win a take their city.</p>
+            <p>3) If you are attacked or attack another player and you have more troops than they have defending, you will win and take their city.</p>
             <p>4) To get more troops you will have to train them on the profile page.</p>
         </div>
     </div>
@@ -84,10 +86,18 @@
             <div class="userCityContainerModal"></div>
         </div>
     </div>
+    <div class='mailModal'>
+        <div class='mailContent'>
+            <span class="close">&times;</span>
+            <h1 class='mailboxHeader'>MAILBOX</h1>
+            <div class='mailContainer'></div>
+        </div>
+    </div>
 
     <div class='seeUsersPage'></div>
     <div class='attackUsersPage'>
         <div class='attackUsersPageContainer'></div>
     </div>
+    <footer><a href="https://icons8.com/icon/YRRhCXfA0Vd0/mail">Mail icon by Icons8</a></footer>
 </body>
 </html>
